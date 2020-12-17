@@ -2,6 +2,7 @@ package fca.unam.mx.dal;
 
 
 import fca.unam.mx.dao.StoreDao;
+import fca.unam.mx.dto.ClientDto;
 import fca.unam.mx.dto.ProductDto;
 import fca.unam.mx.dto.ResponseDto;
 import fca.unam.mx.services.JdbiService;
@@ -28,6 +29,16 @@ public class StoreDal {
         Jdbi jdbi = jdbiService.getInstance();
         var products = jdbi.withExtension(StoreDao.class, dao -> dao.getProducts());
         responseDto.setData(products);
+        return responseDto;
+    }
+
+    public ResponseDto<List<ClientDto>> getClients() {
+
+        ResponseDto responseDto = new ResponseDto<List<ClientDto>>();
+        responseDto.setSuccess(true);
+        Jdbi jdbi = jdbiService.getInstance();
+        var clients = jdbi.withExtension(StoreDao.class, dao -> dao.getClients());
+        responseDto.setData(clients);
         return responseDto;
     }
 
